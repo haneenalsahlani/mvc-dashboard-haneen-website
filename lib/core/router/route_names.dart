@@ -1,0 +1,9 @@
+final String splashRoute = '/splash';
+final String loginRoute = '/login';
+final String homeRoute = '/home';
+final String dashboardRoute = '/dashboard';
+final String addBlogRoute = '/add-blog';
+final String blogsListRoute = '/blogs-list';
+final String addAppRoute = '/add-app';
+final String addTechStackRoute = '/add-tech-stack';
+final String techStacksListRoute = '/tech-stacks-list';
