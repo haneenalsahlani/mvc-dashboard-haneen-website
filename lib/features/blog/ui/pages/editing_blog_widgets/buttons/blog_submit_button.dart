@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:haneen_site__api_dashboard/core/router/route_names.dart';
 import 'package:haneen_site__api_dashboard/features/blog/models/blog_model.dart';
 import 'package:haneen_site__api_dashboard/features/blog/providers/blog_model_providers/editing_blog_info_provider.dart';
-import 'package:haneen_site__api_dashboard/features/blog/providers/blog_model_providers/slug_provider.dart';
+import 'package:haneen_site__api_dashboard/features/blog/providers/ui_providers/content_input_provider.dart';
 import 'package:haneen_site__api_dashboard/features/blog/providers/use_cases/add_blog_provider.dart';
+import 'package:haneen_site__api_dashboard/features/blog/providers/use_cases/check_slug_exits.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class BlogSubmitButton extends ConsumerWidget {
@@ -23,7 +26,7 @@ class BlogSubmitButton extends ConsumerWidget {
 
     final state = ref.read(addBlogViewModelProvider);
     final _editingBlog = ref.read(editingBlogInfoProvider);
-    bool editMode = _editingBlog.id != 0;
+    bool editMode = _editingBlog.id != null;
 
     if (editMode) {
       buttonProgressLabel = 'updating';
@@ -33,7 +36,7 @@ class BlogSubmitButton extends ConsumerWidget {
     return FilledButton.icon(
       onPressed: state.isLoading
           ? null
-          : () => _handleSubmit(context, ref, editMode, _editingBlog.id),
+          : () => _handleSubmit(context, ref, editMode, _editingBlog),
       style: FilledButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -60,7 +63,8 @@ class BlogSubmitButton extends ConsumerWidget {
     BuildContext context,
     WidgetRef ref,
     bool editMode,
-    int? id,
+
+    BlogModel _editingBlog,
   ) async {
     if (!formKey.currentState!.validate()) return;
 
@@ -69,15 +73,15 @@ class BlogSubmitButton extends ConsumerWidget {
     final result = editMode
         ? await viewModel.updateBlog(
             BlogModel(
-              id: id,
-              title: ref.read(blogSlugProvider).replaceAll("-", " "),
+              id: _editingBlog.id,
+              title: _editingBlog.title,
               content: contentController.text,
               summary: summaryController.text,
             ),
           )
         : await viewModel.submitBlog(
             BlogModel(
-              title: ref.read(blogSlugProvider).replaceAll("-", " "),
+              title: _editingBlog.title,
               content: contentController.text,
               summary: summaryController.text,
             ),
@@ -101,6 +105,11 @@ class BlogSubmitButton extends ConsumerWidget {
           duration: const Duration(seconds: 3),
         ),
       );
+
+      ref.read(editingBlogInfoProvider.notifier).reset();
+      ref.read(checkSlugExistsProvider.notifier).reset();
+      ref.read(contentInputControllerProvider.notifier).clear();
+      context.go(blogsListRoute);
     }
   }
 }

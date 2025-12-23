@@ -9,18 +9,34 @@ final editingBlogInfoProvider =
 class _EditingBlogViewModel extends Notifier<BlogModel> {
   @override
   build() {
-    return BlogModel(id: 0, title: '', slug: '', content: '', summary: '');
+    return BlogModel(
+      id: 0,
+      title: null,
+      slug: null,
+      content: null,
+      summary: null,
+    );
   }
 
-  void changeBlog(
-    String id,
+  void reset() {
+    state = BlogModel(
+      id: 0,
+      title: null,
+      slug: null,
+      content: null,
+      summary: null,
+    );
+  }
+
+  void changeBlog({
+    String? id,
     String? newTitle,
     String? newSummary,
     String? newContent,
     String? newSlug,
-  ) {
+  }) {
     state = state.copyWith(
-      id: int.parse(id),
+      id: id == null ? state.id : int.parse(id),
       title: newTitle ?? state.title,
       summary: newSummary ?? state.summary,
       content: newContent ?? state.content,

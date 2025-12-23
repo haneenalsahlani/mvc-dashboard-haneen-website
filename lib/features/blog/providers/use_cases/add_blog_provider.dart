@@ -39,7 +39,7 @@ class AddBlogViewModel extends Notifier<AsyncValue<BlogModel?>> {
     state = await AsyncValue.guard(() async {
       final response = await _apiService.handleRequest(
         () => _apiService.dio.put(
-          blogApiRoute + "/${blog.id}",
+          "$blogApiRoute/${blog.id}",
           data: blog.toJson(),
         ),
         parser: (data) => BlogModel.fromJson(data),

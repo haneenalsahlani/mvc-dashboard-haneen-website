@@ -18,7 +18,7 @@ class EditAppFeaturesList extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appFeatures = ref.watch(appProvider).features;
 
-    if (appFeatures == null || appFeatures.isEmpty) {
+    if (appFeatures.isEmpty) {
       return _addFeatureFloatingActionButton(
         height: height,
         width: width,
@@ -55,7 +55,6 @@ class EditAppFeaturesList extends HookConsumerWidget {
 
 class _addFeatureFloatingActionButton extends ConsumerWidget {
   const _addFeatureFloatingActionButton({
-    super.key,
     required this.child,
     required this.height,
     required this.width,

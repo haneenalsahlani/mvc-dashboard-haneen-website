@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:haneen_site__api_dashboard/features/blog/providers/blog_model_providers/editing_blog_info_provider.dart';
 import 'package:haneen_site__api_dashboard/features/blog/providers/ui_providers/content_input_provider.dart';
 
-import 'package:haneen_site__api_dashboard/features/blog/providers/blog_model_providers/slug_provider.dart';
 import 'package:haneen_site__api_dashboard/features/blog/ui/pages/editing_blog_widgets/buttons/blog_action_buttons.dart';
 import 'package:haneen_site__api_dashboard/features/blog/ui/pages/editing_blog_widgets/fields/blog_content_field.dart';
 import 'package:haneen_site__api_dashboard/features/blog/ui/pages/editing_blog_widgets/blog_header_section.dart';
@@ -15,18 +14,17 @@ class AddBlogForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //controllers and nodes //
     final contentController = useTextEditingController();
     final summaryController = useTextEditingController();
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final contentFocusNode = useFocusNode();
     final summaryFocusNode = useFocusNode();
 
-    final title = ref.read(blogSlugProvider);
-
     final _blog = ref.watch(editingBlogInfoProvider);
 
-    _blog.content.isEmpty ? null : contentController.text = _blog.content;
-    _blog.summary.isEmpty ? null : summaryController.text = _blog.summary;
+    contentController.text = _blog.content ?? "";
+    summaryController.text = _blog.summary ?? "";
 
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
@@ -47,7 +45,7 @@ class AddBlogForm extends HookConsumerWidget {
             spacing: 10,
             children: [
               // Header Section
-              BlogHeaderSection(title: title),
+              BlogHeaderSection(title: _blog.title ?? ""),
 
               // Content Field with Character Counter
               BlogContentField(

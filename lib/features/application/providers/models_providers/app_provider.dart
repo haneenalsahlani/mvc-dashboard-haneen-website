@@ -22,7 +22,7 @@ class AppNotifier extends Notifier<AppModel> {
   }
 
   void setFeatureImage(List<String> featureImage) {
-    final stateFeatures = state.features ?? [];
+    final stateFeatures = state.features;
 
     List<AppFeatureModel> features = featureImage
         .map(
@@ -33,13 +33,13 @@ class AppNotifier extends Notifier<AppModel> {
           ),
         )
         .toList();
-    print(features.toString());
+
     stateFeatures.addAll(features);
     state = state.copyWith(features: stateFeatures);
   }
 
   void updateAppFeature(int index, String title, String description) {
-    final stateFeatures = state.features ?? [];
+    final stateFeatures = state.features;
     stateFeatures[index] = stateFeatures[index].copyWith(
       description: description,
       title: title,
@@ -48,19 +48,19 @@ class AppNotifier extends Notifier<AppModel> {
   }
 
   void deleteAppFeature(int index) {
-    final stateFeatures = state.features ?? [];
+    final stateFeatures = state.features;
     stateFeatures.removeAt(index);
     state = state.copyWith(features: stateFeatures);
   }
 
   void updateFeatureDescription(int index, String value) {
-    final stateFeatures = state.features ?? [];
+    final stateFeatures = state.features;
     stateFeatures[index] = stateFeatures[index].copyWith(description: value);
     state = state.copyWith(features: stateFeatures);
   }
 
   void updateFeatureTitle(int index, String value) {
-    final stateFeatures = state.features ?? [];
+    final stateFeatures = state.features;
     stateFeatures[index] = stateFeatures[index].copyWith(title: value);
     state = state.copyWith(features: stateFeatures);
   }
@@ -69,7 +69,7 @@ class AppNotifier extends Notifier<AppModel> {
     //delete old image
     final dio = ref.read(dioProvider);
     dio.delete(imageUrl);
-    final stateFeatures = state.features ?? [];
+    final stateFeatures = state.features;
     stateFeatures.removeAt(index);
 
     state = state.copyWith(features: stateFeatures);

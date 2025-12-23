@@ -7,7 +7,7 @@ class MainMenuDashboard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
+    return Column(
       spacing: 20,
       mainAxisAlignment: .center,
       crossAxisAlignment: .end,

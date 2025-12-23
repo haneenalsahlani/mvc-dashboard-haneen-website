@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:haneen_site__api_dashboard/features/blog/providers/blog_model_providers/slug_provider.dart';
+import 'package:haneen_site__api_dashboard/features/blog/providers/blog_model_providers/editing_blog_info_provider.dart';
+
 import 'package:haneen_site__api_dashboard/features/blog/ui/components/edit_text_form_field.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -52,8 +53,10 @@ class BlogChangeSlugButton extends HookConsumerWidget {
               FilledButton.icon(
                 onPressed: () {
                   ref
-                      .read(blogSlugProvider.notifier)
-                      .addValue(slugController.text.replaceAll(" ", "-"));
+                      .read(editingBlogInfoProvider.notifier)
+                      .changeBlog(
+                        newSlug: slugController.text.replaceAll(" ", "-"),
+                      );
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.check, size: 18),

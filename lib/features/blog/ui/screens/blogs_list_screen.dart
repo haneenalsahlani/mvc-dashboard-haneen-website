@@ -4,7 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:haneen_site__api_dashboard/core/router/route_names.dart';
 import 'package:haneen_site__api_dashboard/features/blog/providers/ui_providers/content_input_provider.dart';
 import 'package:haneen_site__api_dashboard/features/blog/providers/blog_model_providers/editing_blog_info_provider.dart';
-import 'package:haneen_site__api_dashboard/features/blog/providers/blog_model_providers/slug_provider.dart';
+import 'package:haneen_site__api_dashboard/features/blog/providers/use_cases/check_slug_exits.dart';
+
 import 'package:haneen_site__api_dashboard/features/blog/providers/use_cases/delete_blog_provier.dart';
 import 'package:haneen_site__api_dashboard/features/blog/providers/use_cases/list_blog_provider.dart';
 
@@ -62,15 +63,13 @@ class BlogsListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final listBlog = ref.watch(listBlogProvider);
-    ref.refresh(listBlogProvider);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(blogSlugProvider.notifier).addValue("");
-          ref
-              .read(editingBlogInfoProvider.notifier)
-              .changeBlog("0", '', "", "", "");
+          ref.read(editingBlogInfoProvider.notifier).reset();
+          ref.read(checkSlugExistsProvider.notifier).reset();
+          ref.read(contentInputControllerProvider.notifier).clear();
           context.go(addBlogRoute);
         },
         child: const Icon(Icons.add),
@@ -99,22 +98,28 @@ class BlogsListScreen extends ConsumerWidget {
                         ref
                             .read(editingBlogInfoProvider.notifier)
                             .changeBlog(
-                              blog.id.toString(),
-                              blog.title,
-                              blog.summary,
-                              blog.content,
-                              blog.slug,
+                              id: blog.id.toString(),
+                              newTitle: blog.title,
+                              newSummary: blog.summary,
+                              newContent: blog.content,
+                              newSlug: blog.slug,
                             );
                         ref
                             .read(contentInputControllerProvider.notifier)
-                            .addText(blog.content);
+                            .addText(blog.content ?? "");
                         ref
-                            .read(blogSlugProvider.notifier)
-                            .addValue(blog.slug ?? "new slugggy");
+                            .read(editingBlogInfoProvider.notifier)
+                            .changeBlog(
+                              id: blog.id.toString(),
+                              newTitle: blog.title,
+                              newSummary: blog.summary,
+                              newContent: blog.content,
+                              newSlug: blog.slug,
+                            );
                         context.go(addBlogRoute);
                       },
-                      title: Text(blog.title),
-                      subtitle: Text(blog.summary),
+                      title: Text(blog.title ?? ""),
+                      subtitle: Text(blog.summary ?? ""),
                       trailing: IconButton(
                         icon: const Icon(Icons.delete),
                         onPressed: blog.id != null

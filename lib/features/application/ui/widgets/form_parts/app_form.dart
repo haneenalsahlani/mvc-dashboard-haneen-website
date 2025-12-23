@@ -6,7 +6,6 @@ import 'package:haneen_site__api_dashboard/core/router/route_names.dart';
 import 'package:haneen_site__api_dashboard/features/application/providers/use_cases_provider/create_app_provider.dart';
 import 'package:haneen_site__api_dashboard/features/application/ui/widgets/text_fields/app_dics_field.dart';
 
-import 'package:haneen_site__api_dashboard/features/application/ui/widgets/form_parts/app_related_tech_list_widget.dart';
 import 'package:haneen_site__api_dashboard/features/application/ui/widgets/text_fields/app_text_form_field.dart';
 import 'package:haneen_site__api_dashboard/features/application/ui/widgets/text_fields/app_title_container.dart';
 import 'package:haneen_site__api_dashboard/features/application/ui/widgets/text_fields/wide_app_text_form_field.dart';
@@ -32,18 +31,18 @@ class AppForm extends HookConsumerWidget {
       }
     });
 
-    final _createApp = ref.watch(createAppProvider);
-    final _formKey = GlobalKey<FormState>();
+    final createApp = ref.watch(createAppProvider);
+    final formKey = GlobalKey<FormState>();
     final descriptionController = useTextEditingController();
     final hoursWorkedController = useTextEditingController();
     final effortLevelController = useTextEditingController();
     final githubLinkController = useTextEditingController();
     final liveLinkController = useTextEditingController();
     final priceController = useTextEditingController();
-    return _createApp.isLoading
+    return createApp.isLoading
         ? Center(child: CircularProgressIndicator())
         : Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               spacing: 20,
               children: [
@@ -91,7 +90,7 @@ class AppForm extends HookConsumerWidget {
                     children: [
                       OutlinedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
+                          if (formKey.currentState!.validate()) {
                             ref
                                 .read(createAppProvider.notifier)
                                 .createApp(
@@ -102,7 +101,7 @@ class AppForm extends HookConsumerWidget {
                                   githubLinkController.text,
                                   liveLinkController.text,
                                 );
-                            _createApp.whenData((data) {
+                            createApp.whenData((data) {
                               if (data != null) {
                                 context.go(homeRoute);
                               }

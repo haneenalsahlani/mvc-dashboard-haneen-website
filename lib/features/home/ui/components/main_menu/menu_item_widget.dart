@@ -33,7 +33,12 @@ class MenuItemWidget extends HookConsumerWidget {
           ref.read(activeMenuMemberProvider.notifier).toggle(item);
         },
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
+          decoration: BoxDecoration(
+            color: isSelected ? Colors.indigo : Colors.transparent,
+            borderRadius: BorderRadius.circular(6),
+          ),
+
+          duration: const Duration(milliseconds: 200),
           curve: Curves.easeInOutCubic,
           transform: Matrix4.translationValues(isSelected ? 8 : 0, 0, 0),
           child: SizedBox(
@@ -42,7 +47,7 @@ class MenuItemWidget extends HookConsumerWidget {
                 Positioned.fill(
                   child: Center(
                     child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 250),
+                      duration: const Duration(milliseconds: 200),
                       switchInCurve: Curves.easeInOut,
                       switchOutCurve: Curves.easeInOut,
                       transitionBuilder: (child, animation) {
@@ -62,7 +67,7 @@ class MenuItemWidget extends HookConsumerWidget {
                       child: Icon(
                         isSelected ? item.icon : item.outLied,
                         key: ValueKey(isSelected),
-                        color: isSelected ? Colors.indigo : Colors.black87,
+                        color: isSelected ? Colors.black87 : Colors.indigo,
                         size: isSelected ? 20 : 24,
                       ),
                     ),

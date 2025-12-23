@@ -7,41 +7,54 @@ class MainDashboardContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        spacing: 20,
-        children: [
-          Spacer(),
-          TextButton.icon(
-            onPressed: () {
-              context.go(addBlogRoute);
-            },
-            icon: Icon(Icons.add),
-            label: Text("Add Blog"),
-          ),
-          TextButton.icon(
-            onPressed: () {
-              context.go(blogsListRoute);
-            },
-            icon: Icon(Icons.list),
-            label: Text("Blogs List"),
-          ),
-          TextButton.icon(
-            onPressed: () {
-              context.go(addAppRoute);
-            },
-            icon: Icon(Icons.add),
-            label: Text("add app"),
-          ),
-          TextButton.icon(
-            onPressed: () {
-              context.go(addTechStackRoute);
-            },
-            icon: Icon(Icons.add),
-            label: Text("add tech stack"),
-          ),
-          Spacer(),
-        ],
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Theme.of(context).colorScheme.surfaceContainerHighest.withAlpha(50),
+            Theme.of(context).colorScheme.surfaceContainerHigh.withAlpha(50),
+            Theme.of(context).colorScheme.surfaceContainerHighest.withAlpha(50),
+          ],
+        ),
+      ),
+      child: Center(
+        child: Column(
+          spacing: 20,
+          children: [
+            Spacer(),
+            TextButton.icon(
+              onPressed: () {
+                context.go(addBlogRoute);
+              },
+              icon: Icon(Icons.add),
+              label: Text("Add Blog"),
+            ),
+            TextButton.icon(
+              onPressed: () {
+                context.go(blogsListRoute);
+              },
+              icon: Icon(Icons.list),
+              label: Text("Blogs List"),
+            ),
+            TextButton.icon(
+              onPressed: () {
+                context.go(addAppRoute);
+              },
+              icon: Icon(Icons.add),
+              label: Text("add app"),
+            ),
+            TextButton.icon(
+              onPressed: () {
+                context.go(addTechStackRoute);
+              },
+              icon: Icon(Icons.add),
+              label: Text("add tech stack"),
+            ),
+            Spacer(),
+          ],
+        ),
       ),
     );
   }

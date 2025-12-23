@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:haneen_site__api_dashboard/features/blog/providers/blog_model_providers/slug_provider.dart';
+import 'package:haneen_site__api_dashboard/features/blog/providers/blog_model_providers/editing_blog_info_provider.dart';
+
 import 'package:haneen_site__api_dashboard/features/blog/providers/use_cases/add_blog_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -52,9 +53,9 @@ class BlogUploadImageButton extends HookConsumerWidget {
 
     try {
       final viewModel = ref.read(addBlogViewModelProvider.notifier);
-      final slug = ref.read(blogSlugProvider);
-
-      final imageUrl = await viewModel.uploadImage(slug);
+      final _editingBlog = ref.read(editingBlogInfoProvider);
+      if (_editingBlog.id == null || _editingBlog.slug == null) return;
+      final imageUrl = await viewModel.uploadImage(_editingBlog.slug!);
 
       if (imageUrl != null) {
         contentController.text += "\n![image]($imageUrl)\n";

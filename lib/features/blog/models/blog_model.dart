@@ -1,17 +1,11 @@
 class BlogModel {
-  final String title;
+  final String? title;
   final String? slug;
   final int? id;
-  final String content;
-  final String summary;
+  final String? content;
+  final String? summary;
 
-  BlogModel({
-    required this.title,
-    this.slug,
-    this.id,
-    required this.content,
-    required this.summary,
-  });
+  BlogModel({this.title, this.slug, this.id, this.content, this.summary});
 
   factory BlogModel.intailValue() {
     return BlogModel(id: 0, slug: "", title: "", content: "", summary: "");
