@@ -10,6 +10,11 @@ final ColorScheme appColorScheme = ColorScheme(
   primaryContainer: const Color(0xFF797EAD),
   onPrimaryContainer: const Color(0xFFB1B3D0),
 
+  primaryFixed: const Color(0xFF535D96),
+  primaryFixedDim: const Color(0xFF535D96),
+  onPrimaryFixed: const Color(0xFF535D96),
+  onPrimaryFixedVariant: const Color(0xFF535D96),
+
   // Secondary colors (using primary variants)
   secondary: const Color(0xFF666DA1),
   onSecondary: const Color(0xFFFFFFFF),

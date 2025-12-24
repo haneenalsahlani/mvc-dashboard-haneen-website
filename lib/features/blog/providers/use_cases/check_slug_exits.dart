@@ -10,6 +10,7 @@ class _checkSlugExists extends Notifier<AsyncValue<BlogModel?>> {
   }
 
   Future<void> checkSlugExists(String slug) async {
+    slug = slug.trim().replaceAll(' ', '-');
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final dio = ref.read(dioProvider);

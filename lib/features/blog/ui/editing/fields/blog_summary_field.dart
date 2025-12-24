@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:haneen_site__api_dashboard/features/blog/ui/components/edit_text_form_field.dart';
 
 class BlogSummaryField extends StatelessWidget {
   final TextEditingController controller;
@@ -18,10 +17,14 @@ class BlogSummaryField extends StatelessWidget {
         border: Border.all(color: theme.colorScheme.outline, width: 0.2),
       ),
       padding: const EdgeInsets.all(4),
-      child: EditTextFormField(
+      child: TextFormField(
         controller: controller,
-        labelText: 'Brief summary of your post',
         focusNode: focusNode,
+        decoration: InputDecoration(
+          hintText: 'Brief summary of your post',
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.all(16),
+        ),
       ),
     );
   }

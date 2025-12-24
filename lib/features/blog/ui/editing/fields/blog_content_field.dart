@@ -79,8 +79,8 @@ class BlogContentField extends HookWidget {
             controller: controller,
             focusNode: focusNode,
             style: KeditTextFieldTheme,
-            minLines: 15,
-            maxLines: null,
+            minLines: 10,
+            maxLines: 15,
             onChanged: (value) {
               charCount.value = value.length;
               onChanged?.call(value);

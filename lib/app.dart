@@ -16,6 +16,29 @@ class MyApp extends StatelessWidget {
       routerConfig: router,
       title: 'Flutter Demo',
       theme: ThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll(appColorScheme.primary),
+            foregroundColor: WidgetStatePropertyAll(appColorScheme.onPrimary),
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+            ),
+            backgroundColor: WidgetStatePropertyAll(appColorScheme.primary),
+            foregroundColor: WidgetStatePropertyAll(appColorScheme.onPrimary),
+          ),
+        ),
+        cardTheme: CardThemeData().copyWith(
+          color: appColorScheme.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          elevation: 2,
+          shadowColor: appColorScheme.onPrimary,
+        ),
         useMaterial3: true,
         colorScheme: appColorScheme,
         textTheme: KTextTheme,

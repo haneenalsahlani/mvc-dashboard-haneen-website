@@ -26,7 +26,7 @@ class MainDashboardContainer extends StatelessWidget {
             Spacer(),
             TextButton.icon(
               onPressed: () {
-                context.go(addBlogRoute);
+                context.go(editBlogRoute);
               },
               icon: Icon(Icons.add),
               label: Text("Add Blog"),
@@ -40,17 +40,24 @@ class MainDashboardContainer extends StatelessWidget {
             ),
             TextButton.icon(
               onPressed: () {
-                context.go(addAppRoute);
+                context.go(editAppRoute);
               },
               icon: Icon(Icons.add),
               label: Text("add app"),
             ),
             TextButton.icon(
               onPressed: () {
-                context.go(addTechStackRoute);
+                context.go(editTechStackRoute);
               },
               icon: Icon(Icons.add),
               label: Text("add tech stack"),
+            ),
+            TextButton.icon(
+              onPressed: () {
+                context.go(editProjectRoute);
+              },
+              icon: Icon(Icons.add),
+              label: Text("add project"),
             ),
             Spacer(),
           ],
