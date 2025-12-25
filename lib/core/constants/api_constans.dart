@@ -4,3 +4,5 @@ final String uploadFileDestination = "/uploads";
 final String blogApiRoute = "/blogpost";
 final String applicationApiRoute = "/application";
 final String techStackApiRoute = "/stack";
+final String projectApiRoute = "/projects";
+final String addToProjectApiRoute = "/addtoproject";

@@ -17,7 +17,7 @@ void listenToSlugValidation(
           if (error.response?.statusCode == 404) {
             ref
                 .read(editingBlogInfoProvider.notifier)
-                .changeBlog(newSlug: slugController.text);
+                .changeBlog(newSlug: slugController.text.replaceAll(" ", "-"));
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text('Slug is  available')));

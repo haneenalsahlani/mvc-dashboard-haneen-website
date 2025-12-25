@@ -8,6 +8,8 @@ import 'package:haneen_site__api_dashboard/features/blog/ui/screens/edit_blog_sc
 import 'package:haneen_site__api_dashboard/features/home/ui/screens/home_screen.dart';
 import 'package:haneen_site__api_dashboard/features/onboarding/ui/splash_screen.dart';
 import 'package:haneen_site__api_dashboard/features/project/ui/screens/edit_project_screen.dart';
+import 'package:haneen_site__api_dashboard/features/project/ui/screens/list_project_screen.dart';
+
 import 'package:haneen_site__api_dashboard/features/teckstack/ui/screens/add_tech_stack_screen.dart';
 
 /// The route configuration.
@@ -69,6 +71,13 @@ final router = GoRouter(
       name: 'addProject', // Add names for easier navigation
       builder: (BuildContext context, GoRouterState state) {
         return EditProjectScreen();
+      },
+    ),
+    GoRoute(
+      path: projectsListRoute,
+      name: 'listProject', // Add names for easier navigation
+      builder: (BuildContext context, GoRouterState state) {
+        return ListProjectScreen();
       },
     ),
     // GoRoute(

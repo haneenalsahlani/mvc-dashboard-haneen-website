@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:haneen_site__api_dashboard/core/theme/edit_text_field_theme.dart';
+import 'package:haneen_site__api_dashboard/core/themes/edit_text_field_theme.dart';
 
 class BlogContentField extends HookWidget {
   final TextEditingController controller;
@@ -79,8 +79,8 @@ class BlogContentField extends HookWidget {
             controller: controller,
             focusNode: focusNode,
             style: KeditTextFieldTheme,
-            minLines: 10,
-            maxLines: 15,
+            minLines: 20,
+            maxLines: 35,
             onChanged: (value) {
               charCount.value = value.length;
               onChanged?.call(value);

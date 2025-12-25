@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:haneen_site__api_dashboard/core/router/app_router.dart';
 import 'package:haneen_site__api_dashboard/core/services/messanger_service.dart';
-import 'package:haneen_site__api_dashboard/core/theme/color_scheme.dart';
-import 'package:haneen_site__api_dashboard/core/theme/styles/text_theme.dart';
+import 'package:haneen_site__api_dashboard/core/themes/color_scheme.dart';
+import 'package:haneen_site__api_dashboard/core/themes/styles/text_theme.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

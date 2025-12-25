@@ -22,14 +22,13 @@ class EditBlogForm extends HookConsumerWidget {
     final contentFocusNode = useFocusNode();
     final summaryFocusNode = useFocusNode();
 
-    String submitLabel = 'create blog ';
-
     ////////////////////////////////////////////
 
     /////
     //
     final _editingBlog = ref.watch(editingBlogInfoProvider);
-    final editMode = _editingBlog.id != null;
+
+    final editMode = _editingBlog.id != 0;
 
     ///
     ///
@@ -39,7 +38,6 @@ class EditBlogForm extends HookConsumerWidget {
       _titleController.text = _editingBlog.title ?? "";
       _contentController.text = _editingBlog.content ?? "";
       _summaryController.text = _editingBlog.summary ?? "";
-      submitLabel = 'update blog';
     }
 
     return LayoutBuilder(
@@ -48,7 +46,7 @@ class EditBlogForm extends HookConsumerWidget {
         child: Row(
           children: [
             SizedBox(
-              width: constraints.maxWidth * 0.3,
+              width: constraints.maxWidth * 0.5,
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(20),
@@ -108,7 +106,7 @@ class EditBlogForm extends HookConsumerWidget {
               ),
             ),
 
-            Expanded(child: gptRender()),
+            Expanded(child: GptRender()),
           ],
         ),
       ),

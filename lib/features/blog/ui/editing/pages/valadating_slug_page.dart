@@ -32,7 +32,7 @@ class valadatingSlugPage extends ConsumerWidget {
                 ref.invalidate(checkSlugExistsProvider);
                 ref
                     .read(checkSlugExistsProvider.notifier)
-                    .checkSlugExists(slugController.text);
+                    .checkSlugExists(slugController.text.replaceAll(" ", "-"));
               },
               child: Text('check if avaible'),
             ),

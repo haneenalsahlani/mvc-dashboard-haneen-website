@@ -7,6 +7,7 @@ import 'package:haneen_site__api_dashboard/core/services/file_picker_service.dar
 import 'package:haneen_site__api_dashboard/core/utils/add_to_formdata.dart';
 import 'package:dio/dio.dart';
 import 'package:haneen_site__api_dashboard/features/blog/models/blog_model.dart';
+import 'package:haneen_site__api_dashboard/features/project/providers/model_providers/selected_project_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AddBlogViewModel extends Notifier<AsyncValue<BlogModel?>> {
@@ -16,12 +17,21 @@ class AddBlogViewModel extends Notifier<AsyncValue<BlogModel?>> {
   }
 
   Future<BlogModel?> submitBlog(BlogModel blog) async {
+    final selectedProject = ref.read(selectedProjectProvider);
+
+    print(blog.content);
+    //blogpost/addtoproject/1
+    String api = blogApiRoute;
+    if (selectedProject.isNotEmpty) {
+      api += addToProjectApiRoute + "/${selectedProject}";
+      print("this is the api $api");
+    }
     ApiService _apiService = ApiService(ref.read(dioProvider));
     state = const AsyncValue.loading();
 
     state = await AsyncValue.guard(() async {
       final response = await _apiService.handleRequest(
-        () => _apiService.dio.post(blogApiRoute, data: blog.toJson()),
+        () => _apiService.dio.post(api, data: blog.toJson()),
         parser: (data) => BlogModel.fromJson(data),
         ref: ref,
       );
@@ -53,33 +63,27 @@ class AddBlogViewModel extends Notifier<AsyncValue<BlogModel?>> {
   }
 
   Future<String?> uploadImage(String slug) async {
-    try {
-      final files = await pickSingleFile();
+    final files = await pickSingleFile();
 
-      if (files.isEmpty) {
-        debugPrint('No file selected');
-        return null;
-      }
-
-      final formData = await addFileToFormData(files);
-      debugPrint("files: ${formData.files.toString()}");
-
-      final dio = ref.read(dioProvider);
-      final response = await dio.post(
-        '$uploadFileDestination/$blogApiRoute/$slug',
-        data: formData,
-        options: Options(headers: {"content-type": "multipart/form-data"}),
-      );
-
-      final data = response.data as List<dynamic>;
-      final imageUrl = data[0]['url'] as String;
-
-      debugPrint('Upload successful: $imageUrl');
-      return imageUrl;
-    } catch (error) {
-      debugPrint('Upload error: $error');
-      rethrow;
+    if (files.isEmpty) {
+      debugPrint('No file selected');
+      return null;
     }
+
+    final formData = await addFileToFormData(files);
+
+    final dio = ref.read(dioProvider);
+    final response = await dio.post(
+      '$uploadFileDestination/$blogApiRoute/$slug',
+      data: formData,
+      options: Options(headers: {"content-type": "multipart/form-data"}),
+    );
+
+    final data = response.data as List<dynamic>;
+    final imageUrl = data[0]['url'] as String;
+
+    debugPrint('Upload successful: $imageUrl');
+    return imageUrl;
   }
 }
 

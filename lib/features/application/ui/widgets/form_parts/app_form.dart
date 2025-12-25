@@ -64,17 +64,9 @@ class AppForm extends HookConsumerWidget {
                         controller: effortLevelController,
                         label: "effort level",
                       ),
-                      SmallAppTextFormField(
-                        controller: priceController,
-                        label: "price",
-                      ),
                       WideAppTextFormField(
                         controller: githubLinkController,
                         label: "github link",
-                      ),
-                      WideAppTextFormField(
-                        controller: liveLinkController,
-                        label: "live link",
                       ),
                     ],
                   ),
@@ -94,12 +86,10 @@ class AppForm extends HookConsumerWidget {
                             ref
                                 .read(createAppProvider.notifier)
                                 .createApp(
-                                  priceController.text,
                                   effortLevelController.text,
                                   hoursWorkedController.text,
                                   descriptionController.text,
                                   githubLinkController.text,
-                                  liveLinkController.text,
                                 );
                             createApp.whenData((data) {
                               if (data != null) {

@@ -12,12 +12,10 @@ class _CreateAppNotifier extends Notifier<AsyncValue<AppModel?>> {
   }
 
   Future<void> createApp(
-    String price,
     String effortLevel,
     String hoursWorked,
     String description,
     String githubLink,
-    String liveLink,
   ) async {
     state = await AsyncValue.guard(() async {
       final dio = ref.read(dioProvider);
@@ -29,12 +27,11 @@ class _CreateAppNotifier extends Notifier<AsyncValue<AppModel?>> {
       }
       app = app.copyWith(
         title: app.slug.replaceAll(" ", "-"),
-        price: double.parse(price),
+
         effortLevel: effortLevel,
         hoursWorked: int.parse(hoursWorked),
         description: description,
         githubLink: githubLink,
-        liveLink: liveLink,
       );
 
       ApiService apiService = ApiService(dio);

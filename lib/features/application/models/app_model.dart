@@ -9,11 +9,10 @@ class AppModel {
   final String slug;
   final int? hoursWorked;
   final String? effortLevel;
-  final double? price;
+  final String? developmentStage;
   final List<RelatedTechStackModel>? technologiesList;
   final List<AppFeatureModel> features;
   final String? githubLink;
-  final String? liveLink;
 
   AppModel({
     this.id,
@@ -23,11 +22,10 @@ class AppModel {
     required this.slug,
     this.hoursWorked,
     this.effortLevel,
-    this.price,
+    this.developmentStage,
     this.technologiesList,
     required this.features,
     this.githubLink,
-    this.liveLink,
   });
 
   factory AppModel.fromJson(Map<String, dynamic> json) {
@@ -43,11 +41,7 @@ class AppModel {
                 : int.tryParse(json['hoursWorked'].toString()))
           : null,
       effortLevel: json['effortLevel']?.toString().trim(),
-      price: json['price'] != null
-          ? (json['price'] is double
-                ? json['price']
-                : double.tryParse(json['price'].toString()))
-          : null,
+      developmentStage: json['developmentStage']?.toString().trim(),
       technologiesList: json['technologiesList'] != null
           ? List<RelatedTechStackModel>.from(
               json['technologiesList'].map(
@@ -61,7 +55,6 @@ class AppModel {
             )
           : [],
       githubLink: json['githubLink']?.toString().trim(),
-      liveLink: json['liveLink']?.toString().trim(),
     );
   }
 
@@ -73,13 +66,13 @@ class AppModel {
       'slug': slug,
       'hoursWorked': hoursWorked,
       'effortLevel': effortLevel,
-      'price': price,
+      'developmentStage': developmentStage,
+
       'technologiesList': technologiesList != null
           ? List<dynamic>.from(technologiesList!.map((x) => x.toJson()))
           : null,
       'features': List<dynamic>.from(features.map((x) => x.toJson())),
       'githubLink': githubLink,
-      'liveLink': liveLink,
     };
   }
 
@@ -91,11 +84,10 @@ class AppModel {
     String? slug,
     int? hoursWorked,
     String? effortLevel,
-    double? price,
+    String? developmentStage,
     List<RelatedTechStackModel>? technologiesList,
     List<AppFeatureModel>? features,
     String? githubLink,
-    String? liveLink,
   }) {
     return AppModel(
       id: id ?? this.id,
@@ -106,11 +98,10 @@ class AppModel {
       slug: slug ?? this.slug,
       hoursWorked: hoursWorked ?? this.hoursWorked,
       effortLevel: effortLevel ?? this.effortLevel,
-      price: price ?? this.price,
+      developmentStage: developmentStage ?? this.developmentStage,
       technologiesList: technologiesList ?? this.technologiesList,
       features: features ?? this.features,
       githubLink: githubLink ?? this.githubLink,
-      liveLink: liveLink ?? this.liveLink,
     );
   }
 

@@ -26,7 +26,7 @@ class BlogSubmitButton extends ConsumerWidget {
 
     final state = ref.read(addBlogViewModelProvider);
     final _editingBlog = ref.read(editingBlogInfoProvider);
-    bool editMode = _editingBlog.id != null;
+    bool editMode = _editingBlog.id != 0;
 
     if (editMode) {
       buttonProgressLabel = 'updating';
@@ -81,7 +81,7 @@ class BlogSubmitButton extends ConsumerWidget {
           )
         : await viewModel.submitBlog(
             BlogModel(
-              title: _editingBlog.title,
+              title: _editingBlog.slug!.replaceAll("-", " "),
               content: contentController.text,
               summary: summaryController.text,
             ),
