@@ -16,7 +16,7 @@ void listenToSlugValidation(
         if (error is DioException) {
           if (error.response?.statusCode == 404) {
             ref
-                .read(editingBlogInfoProvider.notifier)
+                .read(BlogInfoProvider.notifier)
                 .changeBlog(newSlug: slugController.text.replaceAll(" ", "-"));
             ScaffoldMessenger.of(
               context,
@@ -41,7 +41,7 @@ void listenToSlugValidation(
                       ref.invalidate(checkSlugExistsProvider);
                       Navigator.pop(context);
                       ref
-                          .read(editingBlogInfoProvider.notifier)
+                          .read(BlogInfoProvider.notifier)
                           .changeBlog(
                             id: value.id.toString(),
                             newSlug: value.slug,

@@ -89,7 +89,6 @@ class _EditingProjectNotifier extends Notifier<ProjectModel> {
   }
 }
 
-final editingProjectProvider =
-    NotifierProvider<_EditingProjectNotifier, ProjectModel>(
-      _EditingProjectNotifier.new,
-    );
+final ProjectProvider = NotifierProvider<_EditingProjectNotifier, ProjectModel>(
+  _EditingProjectNotifier.new,
+);

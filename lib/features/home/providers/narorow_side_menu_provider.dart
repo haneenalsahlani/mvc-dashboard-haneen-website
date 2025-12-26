@@ -2,11 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:haneen_site__api_dashboard/features/home/ui/components/main_menu/menu_item_widget.dart';
 import 'package:haneen_site__api_dashboard/features/home/ui/pages/work_area_containers/apps_dashboard_container.dart';
-import 'package:haneen_site__api_dashboard/features/home/ui/pages/work_area_containers/main_dashboard_container.dart';
+import 'package:haneen_site__api_dashboard/features/home/ui/pages/work_area_containers/blog_dashboard_container.dart';
+import 'package:haneen_site__api_dashboard/features/home/ui/pages/work_area_containers/files_dashboard_container.dart';
+import 'package:haneen_site__api_dashboard/features/home/ui/pages/work_area_containers/projects_dashboard_container.dart';
+import 'package:haneen_site__api_dashboard/features/home/ui/pages/work_area_containers/stack_dashboard_container.dart';
+import 'package:haneen_site__api_dashboard/features/home/ui/pages/work_area_containers/topics_dashboard_container.dart';
 
 enum MenuItems {
-  main(Icons.home, Icons.home_rounded, MainDashboardContainer()),
-  app(Icons.apps, Icons.apps_rounded, AppsDashboardContainer());
+  files(Icons.folder, Icons.folder_rounded, FilesDashboardContainer()),
+  blog(Icons.newspaper, Icons.newspaper_rounded, BlogDashboardContainer()),
+  projects(
+    Icons.add_to_drive,
+    Icons.add_to_drive_rounded,
+    ProjectsDashboardContainer(),
+  ),
+  topics(Icons.topic, Icons.topic_rounded, TopicsDashboardContainer()),
+  stack(
+    Icons.stacked_bar_chart,
+    Icons.stacked_bar_chart_rounded,
+    StackDashboardContainer(),
+  );
 
   final IconData icon;
   final Widget areaWidget;
@@ -24,7 +39,7 @@ enum MenuItems {
 class ActiveMenuMember extends Notifier<MenuItems> {
   @override
   MenuItems build() {
-    return MenuItems.main;
+    return MenuItems.files;
   }
 
   void toggle(MenuItems newItem) {

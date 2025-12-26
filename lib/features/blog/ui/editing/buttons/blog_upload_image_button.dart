@@ -53,7 +53,7 @@ class BlogUploadImageButton extends HookConsumerWidget {
 
     try {
       final viewModel = ref.read(addBlogViewModelProvider.notifier);
-      final _editingBlog = ref.read(editingBlogInfoProvider);
+      final _editingBlog = ref.read(BlogInfoProvider);
       if (_editingBlog.id == null || _editingBlog.slug == null) return;
       final imageUrl = await viewModel.uploadImage(_editingBlog.slug!);
 

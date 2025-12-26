@@ -1,7 +1,8 @@
 import 'package:haneen_site__api_dashboard/core/constants/api_constans.dart';
 import 'package:haneen_site__api_dashboard/core/providers/dioProvider.dart';
 import 'package:haneen_site__api_dashboard/features/project/models/project_model.dart';
-import 'package:haneen_site__api_dashboard/features/project/providers/model_providers/editing_project_provider.dart';
+
+import 'package:haneen_site__api_dashboard/features/project/providers/model_providers/project_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class _craeteProject extends AsyncNotifier<ProjectModel?> {
@@ -11,7 +12,7 @@ class _craeteProject extends AsyncNotifier<ProjectModel?> {
   }
 
   Future<void> createProject() async {
-    ProjectModel project = ref.read(editingProjectProvider);
+    ProjectModel project = ref.read(ProjectProvider);
     project = project.copyWith(id: null);
     state = await AsyncValue.guard(() async {
       final dio = ref.read(dioProvider);
@@ -26,7 +27,7 @@ class _craeteProject extends AsyncNotifier<ProjectModel?> {
   }
 
   Future<void> updateProject() async {
-    ProjectModel project = ref.read(editingProjectProvider);
+    ProjectModel project = ref.read(ProjectProvider);
 
     state = await AsyncValue.guard(() async {
       final dio = ref.read(dioProvider);

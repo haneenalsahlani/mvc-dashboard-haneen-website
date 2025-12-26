@@ -17,3 +17,6 @@ final String projectsListRoute = '/projects-list';
 
 final String editTopicRoute = '/edit-topic';
 final String topicsListRoute = '/topics-list';
+
+final String editStackRoute = '/edit-stack';
+final String stacksListRoute = '/stacks-list';

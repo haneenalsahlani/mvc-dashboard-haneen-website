@@ -4,8 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:haneen_site__api_dashboard/core/router/route_names.dart';
 import 'package:haneen_site__api_dashboard/features/project/models/project_model.dart';
+import 'package:haneen_site__api_dashboard/features/project/providers/model_providers/project_provider.dart';
 import 'package:haneen_site__api_dashboard/features/project/providers/use_cases/create_project_provider.dart';
-import 'package:haneen_site__api_dashboard/features/project/providers/model_providers/editing_project_provider.dart';
 import 'package:haneen_site__api_dashboard/features/project/providers/use_cases/upload_project_icon.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -51,7 +51,7 @@ class ProgectFormPage extends HookConsumerWidget {
             SnackBar(content: Text('Project created successfully')),
           );
 
-          ref.read(editingProjectProvider.notifier).reset();
+          ref.read(ProjectProvider.notifier).reset();
           context.go(homeRoute);
         }
       });
@@ -59,7 +59,7 @@ class ProgectFormPage extends HookConsumerWidget {
     ref.listen(uploadProjectIconProvider, (previous, next) {
       next.whenData((value) {
         if (value != null) {
-          ref.read(editingProjectProvider.notifier).editProject(iconUrl: value);
+          ref.read(ProjectProvider.notifier).editProject(iconUrl: value);
         }
       });
     });
@@ -160,7 +160,7 @@ class ProgectFormPage extends HookConsumerWidget {
                               onPressed: () {
                                 if (featureController.text.isNotEmpty) {
                                   ref
-                                      .read(editingProjectProvider.notifier)
+                                      .read(ProjectProvider.notifier)
                                       .editProject(
                                         features: [
                                           ...editingProject.features,
@@ -186,7 +186,7 @@ class ProgectFormPage extends HookConsumerWidget {
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       ref
-                          .read(editingProjectProvider.notifier)
+                          .read(ProjectProvider.notifier)
                           .editProject(
                             description: descriptionController.text,
                             githubLink: githubLinkController.text,

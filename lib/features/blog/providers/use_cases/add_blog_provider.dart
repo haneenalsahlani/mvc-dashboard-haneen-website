@@ -7,7 +7,8 @@ import 'package:haneen_site__api_dashboard/core/services/file_picker_service.dar
 import 'package:haneen_site__api_dashboard/core/utils/add_to_formdata.dart';
 import 'package:dio/dio.dart';
 import 'package:haneen_site__api_dashboard/features/blog/models/blog_model.dart';
-import 'package:haneen_site__api_dashboard/features/project/providers/model_providers/selected_project_provider.dart';
+import 'package:haneen_site__api_dashboard/features/project/providers/model_providers/project_provider.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AddBlogViewModel extends Notifier<AsyncValue<BlogModel?>> {
@@ -17,15 +18,11 @@ class AddBlogViewModel extends Notifier<AsyncValue<BlogModel?>> {
   }
 
   Future<BlogModel?> submitBlog(BlogModel blog) async {
-    final selectedProject = ref.read(selectedProjectProvider);
+    final selectedProject = ref.read(ProjectProvider);
 
-    print(blog.content);
     //blogpost/addtoproject/1
-    String api = blogApiRoute;
-    if (selectedProject.isNotEmpty) {
-      api += addToProjectApiRoute + "/${selectedProject}";
-      print("this is the api $api");
-    }
+    String api = "$blogApiRoute/$addToProjectApiRoute/${selectedProject.id}";
+
     ApiService _apiService = ApiService(ref.read(dioProvider));
     state = const AsyncValue.loading();
 

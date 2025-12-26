@@ -21,7 +21,7 @@ class EditBlogScreen extends HookConsumerWidget {
 
     ///
 
-    final _editingBlog = ref.watch(editingBlogInfoProvider);
+    final _editingBlog = ref.watch(BlogInfoProvider);
     final editMode = _editingBlog.id != null;
 
     return Scaffold(
@@ -29,7 +29,7 @@ class EditBlogScreen extends HookConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              ref.read(editingBlogInfoProvider.notifier).reset();
+              ref.read(BlogInfoProvider.notifier).reset();
               context.go(homeRoute);
             },
             icon: Icon(Icons.backspace),

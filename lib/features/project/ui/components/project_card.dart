@@ -4,8 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:haneen_site__api_dashboard/core/router/route_names.dart';
 import 'package:haneen_site__api_dashboard/core/themes/color_scheme.dart';
 import 'package:haneen_site__api_dashboard/features/project/models/project_model.dart';
-import 'package:haneen_site__api_dashboard/features/project/providers/model_providers/editing_project_provider.dart';
-import 'package:haneen_site__api_dashboard/features/project/providers/model_providers/selected_project_provider.dart';
+import 'package:haneen_site__api_dashboard/features/project/providers/model_providers/project_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProjectCard extends ConsumerWidget {
@@ -51,7 +50,7 @@ class ProjectCard extends ConsumerWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  ref.read(editingProjectProvider.notifier).setProject(project);
+                  ref.read(ProjectProvider.notifier).setProject(project);
                   context.go(editProjectRoute);
                 },
                 icon: Icon(Icons.edit),
@@ -67,9 +66,7 @@ class ProjectCard extends ConsumerWidget {
 
               TextButton(
                 onPressed: () {
-                  ref
-                      .read(selectedProjectProvider.notifier)
-                      .setSelectedProject(index.toString());
+                  ref.read(ProjectProvider.notifier).setProject(project);
                   context.go(editBlogRoute);
                 },
                 child: Text(
@@ -80,6 +77,13 @@ class ProjectCard extends ConsumerWidget {
                     color: AppColors.successA10,
                   ),
                 ),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  ref.read(ProjectProvider.notifier).setProject(project);
+                  context.go(editAppRoute);
+                },
+                child: Text('add app'),
               ),
             ],
           ),

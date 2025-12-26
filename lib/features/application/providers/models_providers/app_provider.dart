@@ -1,6 +1,7 @@
 import 'package:haneen_site__api_dashboard/core/providers/dioProvider.dart';
 import 'package:haneen_site__api_dashboard/features/application/models/app_feature_model.dart';
 import 'package:haneen_site__api_dashboard/features/application/models/app_model.dart';
+import 'package:haneen_site__api_dashboard/features/project/providers/model_providers/project_provider.dart';
 import 'package:riverpod/riverpod.dart';
 
 final appProvider = NotifierProvider<AppNotifier, AppModel>(
@@ -17,8 +18,12 @@ class AppNotifier extends Notifier<AppModel> {
     state = state.copyWith(icon: iconUrl);
   }
 
-  void setSlug(String slug) {
-    state = state.copyWith(slug: slug);
+  void setSlugandDevelopmentStage(String developmentStage) {
+    final relatedProject = ref.read(ProjectProvider);
+    state = state.copyWith(
+      slug: "${relatedProject.slug}-${developmentStage.replaceAll(" ", "-")}",
+      title: "${relatedProject.title} $developmentStage",
+    );
   }
 
   void setFeatureImage(List<String> featureImage) {
@@ -44,12 +49,6 @@ class AppNotifier extends Notifier<AppModel> {
       description: description,
       title: title,
     );
-    state = state.copyWith(features: stateFeatures);
-  }
-
-  void deleteAppFeature(int index) {
-    final stateFeatures = state.features;
-    stateFeatures.removeAt(index);
     state = state.copyWith(features: stateFeatures);
   }
 

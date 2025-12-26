@@ -1,10 +1,9 @@
 import 'package:haneen_site__api_dashboard/features/blog/models/blog_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final editingBlogInfoProvider =
-    NotifierProvider<_EditingBlogViewModel, BlogModel>(() {
-      return _EditingBlogViewModel();
-    });
+final BlogInfoProvider = NotifierProvider<_EditingBlogViewModel, BlogModel>(() {
+  return _EditingBlogViewModel();
+});
 
 class _EditingBlogViewModel extends Notifier<BlogModel> {
   @override

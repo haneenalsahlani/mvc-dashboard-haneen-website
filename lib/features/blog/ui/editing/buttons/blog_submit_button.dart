@@ -25,7 +25,7 @@ class BlogSubmitButton extends ConsumerWidget {
     String buttonProgressLabel = 'Publish Post';
 
     final state = ref.read(addBlogViewModelProvider);
-    final _editingBlog = ref.read(editingBlogInfoProvider);
+    final _editingBlog = ref.read(BlogInfoProvider);
     bool editMode = _editingBlog.id != 0;
 
     if (editMode) {
@@ -106,7 +106,7 @@ class BlogSubmitButton extends ConsumerWidget {
         ),
       );
 
-      ref.read(editingBlogInfoProvider.notifier).reset();
+      ref.read(BlogInfoProvider.notifier).reset();
       ref.read(checkSlugExistsProvider.notifier).reset();
       ref.read(contentInputControllerProvider.notifier).clear();
       context.go(blogsListRoute);

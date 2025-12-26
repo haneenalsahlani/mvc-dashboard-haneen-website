@@ -26,7 +26,7 @@ class EditBlogForm extends HookConsumerWidget {
 
     /////
     //
-    final _editingBlog = ref.watch(editingBlogInfoProvider);
+    final _editingBlog = ref.watch(BlogInfoProvider);
 
     final editMode = _editingBlog.id != 0;
 

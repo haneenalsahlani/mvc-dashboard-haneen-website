@@ -75,7 +75,7 @@ class AppTitleContainer extends HookConsumerWidget {
                         onPressed: () {
                           ref
                               .read(appProvider.notifier)
-                              .setSlug(
+                              .setSlugandDevelopmentStage(
                                 appSlugController.text.trim().replaceAll(
                                   " ",
                                   "-",

@@ -3,9 +3,16 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 
 class ImageFromUrlCard extends StatelessWidget {
-  const ImageFromUrlCard({super.key, required this.imageUrl});
+  const ImageFromUrlCard({
+    super.key,
+    required this.imageUrl,
+    this.width,
+    this.height,
+  });
 
   final String imageUrl;
+  final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +24,8 @@ class ImageFromUrlCard extends StatelessWidget {
       if (imageUrl.toLowerCase().contains('.svg')) {
         return SvgPicture.network(
           imageUrl,
+          width: width,
+          height: height,
           fit: BoxFit.contain,
           placeholderBuilder: (context) =>
               const Center(child: CircularProgressIndicator()),
@@ -25,6 +34,8 @@ class ImageFromUrlCard extends StatelessWidget {
           imageUrl.toLowerCase().contains('.json')) {
         return Lottie.network(
           imageUrl,
+          width: width,
+          height: height,
           fit: BoxFit.contain,
           errorBuilder: (context, error, stackTrace) {
             return const Icon(Icons.error_outline, size: 100);
@@ -33,6 +44,8 @@ class ImageFromUrlCard extends StatelessWidget {
       } else {
         return Image.network(
           imageUrl,
+          width: width,
+          height: height,
           fit: BoxFit.contain,
           loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) return child;

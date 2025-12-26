@@ -10,8 +10,8 @@ import 'package:haneen_site__api_dashboard/features/teckstack/providers/use_case
 import 'package:haneen_site__api_dashboard/features/teckstack/models/tech_stach_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AddTechStackScreen extends HookConsumerWidget {
-  const AddTechStackScreen({super.key});
+class EditStackScreen extends HookConsumerWidget {
+  const EditStackScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
